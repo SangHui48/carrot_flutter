@@ -1,0 +1,84 @@
+[title {label: "건설 현장 인력 매칭 플랫폼 ERD", size: "20"}]
+
+# Colors
+# green #d0e0d0 (마스터/기준 정보)
+# blue #ececfc (업무 트랜잭션/연결 정보)
+# yellow #fbfbdb (확장 정보)
+
+# Entities
+
+[Admins] {bgcolor: "#d0e0d0"}
+  *id {label: "UUID / INT, not null"}
+  username {label: "VARCHAR, not null"}
+  password_hash {label: "VARCHAR, not null"}
+  is_super_user {label: "BOOLEAN, not null"}
+  is_approved {label: "BOOLEAN, not null"}
+  created_at {label: "TIMESTAMP, null"}
+  updated_at {label: "TIMESTAMP, null"}
+
+[Workers] {bgcolor: "#fcecec"}
+  *id {label: "UUID / INT, not null"}
+  name {label: "VARCHAR, not null"}
+  age {label: "INT, null"}
+  address {label: "VARCHAR, null"}
+  phone_number {label: "VARCHAR, not null"}
+  is_foreigner {label: "BOOLEAN, not null"}
+  id_card_image_url {label: "TEXT, null"}
+  construction_certificate_image_url {label: "TEXT, null"}
+  bank_account_number {label: "VARCHAR, null"}
+  is_team_leader {label: "BOOLEAN, not null"}
+  created_at {label: "TIMESTAMP, null"}
+  updated_at {label: "TIMESTAMP, null"}
+
+[General_Contractors] {bgcolor: "#ececfc"}
+  *id {label: "UUID / INT, not null"}
+  name {label: "VARCHAR, not null"}
+  created_at {label: "TIMESTAMP, null"}
+  updated_at {label: "TIMESTAMP, null"}
+
+[Subcontractors] {bgcolor: "#d0e0d0"}
+  *id {label: "UUID / INT, not null"}
+  name {label: "VARCHAR, null"}
+  general_contractor_id {label: "UUID / INT, null"}
+  created_at {label: "TIMESTAMP, null"}
+  updated_at {label: "TIMESTAMP, null"}
+
+[Foreigner_Info] {bgcolor: "#fbfbdb"}
+  *worker_id {label: "UUID / INT, not null"}
+  visa_type {label: "VARCHAR, not null"}
+  stay_period_start {label: "DATE, not null"}
+  stay_period_end {label: "DATE, not null"}
+  certificate_image_url {label: "TEXT, null"}
+
+[Job_Postings] {bgcolor: "#eee0a0"}
+  *id {label: "UUID / INT, not null"}
+  title {label: "VARCHAR, not null"}
+  description {label: "TEXT, null"}
+  required_skill {label: "VARCHAR, not null"}
+  location {label: "VARCHAR, null"}
+  recruitment_count {label: "INT, not null"}
+  salary {label: "VARCHAR, null"}
+  general_contractor_id {label: "UUID / INT, not null"}
+  subcontractor_id {label: "UUID / INT, not null"}
+  contact_person {label: "VARCHAR, null"}
+  contact_phone {label: "VARCHAR, null"}
+  general_contractor_contact_person {label: "VARCHAR, null"}
+  general_contractor_contact_phone {label: "VARCHAR, null"}
+  is_closed {label: "BOOLEAN, not null"}
+  payment_date {label: "DATE, not null"}
+  created_at {label: "TIMESTAMP, null"}
+  updated_at {label: "TIMESTAMP, null"}
+
+[Applications] {bgcolor: "#fcecec"}
+  *id {label: "UUID / INT, not null"}
+  worker_id {label: "UUID / INT, null"}
+  job_posting_id {label: "UUID / INT, null"}
+  status {label: "ENUM, null"}
+  applied_at {label: "TIMESTAMP, null"}
+  hired_at {label: "TIMESTAMP, null"}
+
+[Worker_Skills] {bgcolor: "#ececfc"}
+  *id {label: "UUID / INT, not null"}
+  worker_id {label: "UUID / INT, not null"}
+  skill {label: "VARCHAR, not null"}
+  created_at {label: "TIMESTAMP, null"}
